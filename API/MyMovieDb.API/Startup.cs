@@ -51,7 +51,7 @@ namespace MyMovieDb.API
             services.AddTransient<IUserService, UserService>();
 
             services.AddDbContext<MyMovieDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration["ConnectionString"]));
 
             services.AddControllers();
         }
