@@ -1,6 +1,6 @@
-﻿namespace MyMovieDb.API.Models.Auth
+﻿namespace MyMovieDb.API.Models.User
 {
-    public class UserAuth
+    public class UserToken
     {
         public string UserName { get; set; }
 

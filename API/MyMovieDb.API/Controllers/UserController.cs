@@ -5,27 +5,28 @@ using MyMovieDb.Services.Users.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using MyMovieDb.API.Models.Auth;
 using Microsoft.Extensions.Configuration;
 using System.Text;
+using System.Threading.Tasks;
+using MyMovieDb.API.Models.User;
 
 namespace MyMovieDb.API.Controllers
 {
-    public class AuthController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IUsersService userService;
         private readonly IConfiguration config;
 
-        public AuthController(IUserService userService, IConfiguration config)
+        public UserController(IUsersService userService, IConfiguration config)
         {
             this.userService = userService;
             this.config = config;
         }
 
         [HttpPost("token")]
-        public IActionResult GenerateToken(UserAuth userAuth)
+        public async Task<IActionResult> GenerateToken(UserToken userToken)
         {
-            bool isValidUser = userService.IsValid(userAuth.UserName, userAuth.Password);
+            bool isValidUser = await userService.IsValidUser(userToken.UserName, userToken.Password);
             if (!isValidUser)
             {
                 return BadRequest("invalid user/pass combination");
