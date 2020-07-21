@@ -20,5 +20,6 @@
     <ProjectReference Include="..\..\Data\MyMovieDb.Data.Models\MyMovieDb.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\MyMovieDb.Data\MyMovieDb.Data.csproj" />
     <ProjectReference Include="..\..\Services\MyMovieDb.Services.Users\MyMovieDb.Services.Users.csproj" />
+    <ProjectReference Include="..\..\Services\MyMovieDb.Services\MyMovieDb.Services.csproj" />
   </ItemGroup>
 </Project>

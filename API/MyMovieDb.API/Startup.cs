@@ -18,6 +18,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MyMovieDb.Services.Users.Interfaces;
 using MyMovieDb.Services.Users.Implementations;
+using MyMovieDb.API.Extensions;
+using MyMovieDb.Data.Models;
 
 namespace MyMovieDb.API
 {
@@ -48,12 +50,21 @@ namespace MyMovieDb.API
                     };
                 });
 
-            services.AddTransient<IUserService, UserService>();
+            services.AddDbContext<MyMovieDbContext>(options =>options.UseSqlServer(Configuration["ConnectionString"]));
 
-            services.AddDbContext<MyMovieDbContext>(options =>
-            options.UseSqlServer(Configuration["ConnectionString"]));
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 3;
+            })
+                .AddEntityFrameworkStores<MyMovieDbContext>();
 
             services.AddControllers();
+
+            services.AddServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
