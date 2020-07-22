@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using MyMovieDb.API.Models.User;
+using MyMovieDb.API.Constants;
 
 namespace MyMovieDb.API.Controllers
 {
@@ -32,12 +33,12 @@ namespace MyMovieDb.API.Controllers
                 return BadRequest("invalid user/pass combination");
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config[ConfigurationNamesConstants.JwtKey]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
-                issuer: config["Jwt:Issuer"],
-                audience: config["Jwt:Auidence"],
-                expires: DateTime.Now.AddMinutes(double.Parse(config["Jwt:ExpiresInMinutes"])),
+                issuer: config[ConfigurationNamesConstants.JwtIssuer],
+                audience: config[ConfigurationNamesConstants.JwtAuidence],
+                expires: DateTime.Now.AddMinutes(double.Parse(config[ConfigurationNamesConstants.JwtExpiresInMinutes])),
                 signingCredentials: creds
                 );
 
