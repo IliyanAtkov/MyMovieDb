@@ -18,6 +18,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Services.Users", "Services\MyMovieDb.Services.Users\MyMovieDb.Services.Users.csproj", "{35E662F1-EFF4-42D4-9406-297EFEE7E5A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Services", "Services\MyMovieDb.Services\MyMovieDb.Services.csproj", "{3D1EE578-5CC0-4BCD-800F-51E27EF1685E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F063898-B9C3-4F22-9FE9-0B30B33689CB}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

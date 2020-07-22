@@ -1,0 +1,7 @@
+﻿<Project>
+  <PropertyGroup>
+    <LangVersion>Latest</LangVersion>
+    <WarningsAsErrors>CS8600;CS8602;CS8603;CS8618</WarningsAsErrors>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
