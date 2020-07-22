@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MyMovieDb.API.Models.User;
 using MyMovieDb.API.Constants;
+using MyMovieDb.API.Attributes;
 
 namespace MyMovieDb.API.Controllers
 {
@@ -25,6 +26,7 @@ namespace MyMovieDb.API.Controllers
         }
 
         [HttpPost("token")]
+        [ModelStateValidationActionFilter]
         public async Task<IActionResult> GenerateToken(UserToken userToken)
         {
             bool isValidUser = await userService.IsValidUser(userToken.UserName, userToken.Password);
