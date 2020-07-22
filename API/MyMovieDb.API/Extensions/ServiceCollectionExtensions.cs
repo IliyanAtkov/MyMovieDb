@@ -74,7 +74,7 @@ namespace MyMovieDb.API.Extensions
             LoadAssemblies();
 
             AppDomain.CurrentDomain.GetAssemblies()
-               .Where(t => t.FullName.Contains(MyMovieDbServicesName))
+               .Where(t => t.FullName != null && t.FullName.Contains(MyMovieDbServicesName))
                .SelectMany(s => s.GetTypes().Where(t => t.IsClass && t.GetInterfaces().Any(v => v.Name == nameof(IService)) && t.GetInterfaces().Any(i => i.Name == $"I{t.Name}")))
                 .Select(t => new
                 {

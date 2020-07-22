@@ -1,9 +1,13 @@
-﻿namespace MyMovieDb.API.Models.User
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyMovieDb.API.Models.User
 {
     public class UserToken
     {
-        public string UserName { get; set; }
+        [Required]
+        public string UserName { get; set; } = null!;
 
-        public string Password { get; set; }
+        [Required]
+        public string Password { get; set; } = null!;
     }
 }

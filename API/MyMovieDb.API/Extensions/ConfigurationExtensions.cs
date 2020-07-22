@@ -10,7 +10,7 @@ namespace MyMovieDb.API.Extensions
         {
             foreach (var field in typeof(ConfigurationNamesConstants).GetFields())
             {
-                var fieldValue = field.GetValue(null).ToString();
+                var fieldValue = field.GetValue(null)?.ToString();
                 if (configuration[fieldValue] == null)
                 {
                     throw new ArgumentNullException(fieldValue);
