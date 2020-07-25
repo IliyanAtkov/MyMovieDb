@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using MyMovieDb.API.Constants;
 using MyMovieDb.Data;
 using MyMovieDb.Data.Models;
+using MyMovieDb.Services.Constants;
 using MyMovieDb.Services.Interfaces;
+using MyMovieDb.Services.TheMovieDb.Implementations;
 using Polly;
 using System;
 using System.Linq;
@@ -55,10 +56,9 @@ namespace MyMovieDb.API.Extensions
 
         public static void ConfigureMovieDbApiHttpClient(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddHttpClient(configuration[ConfigurationNamesConstants.TheMovieDbHttpClientName], c =>
+            services.AddHttpClient<TheMovieDbHttpService>(c =>
             {
                 c.BaseAddress = new Uri(configuration[ConfigurationNamesConstants.TheMovieDbUrl]);
-                c.DefaultRequestHeaders.Add("Content-Type", configuration[ConfigurationNamesConstants.TheMovieDbContentTypeHeader]);
                 c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", configuration[ConfigurationNamesConstants.TheMovieDbToken]);
             })
                 .AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(

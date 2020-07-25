@@ -9,8 +9,8 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using MyMovieDb.API.Models.User;
-using MyMovieDb.API.Constants;
 using MyMovieDb.API.Attributes;
+using MyMovieDb.Services.Constants;
 
 namespace MyMovieDb.API.Controllers
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
-using MyMovieDb.API.Constants;
+using MyMovieDb.Services.Constants;
 
 namespace MyMovieDb.API.Extensions
 {

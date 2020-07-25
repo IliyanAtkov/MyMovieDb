@@ -1,4 +1,4 @@
-﻿namespace MyMovieDb.API.Constants
+﻿namespace MyMovieDb.Services.Constants
 {
     public static class ConfigurationNamesConstants
     {
@@ -8,7 +8,6 @@
         public static string JwtExpiresInMinutes = "Jwt:ExpiresInMinutes";
         public static string ConnectionString = "ConnectionString";
         public static string TheMovieDbUrl = "TheMovieDb:Url";
-        public static string TheMovieDbContentTypeHeader = "TheMovieDb:ContentTypeHeader";
         public static string TheMovieDbToken = "TheMovieDb:Token";
         public static string TheMovieDbHttpClientName = "TheMovieDb:HttpClientName";
         public static string TheMovieDbPollyRetryCount = "TheMovieDb:PollyRetryCount";

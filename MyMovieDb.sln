@@ -19,11 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Services.Users", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Services", "Services\MyMovieDb.Services\MyMovieDb.Services.csproj", "{3D1EE578-5CC0-4BCD-800F-51E27EF1685E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Services.TheMovieDb", "Services\MyMovieDb.Services.TheMovieDb\MyMovieDb.Services.TheMovieDb.csproj", "{58F83D4A-CCCC-4E91-8B13-FAF25C63184D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{A903A970-B385-4C12-8C80-E96551A23469}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMovieDb.Common", "Common\MyMovieDb.Common\MyMovieDb.Common.csproj", "{74753D73-50BA-4AE3-A661-7A9FA66A66EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMovieDb.Services.TheMovieDb", "Services\MyMovieDb.Services.TheMovieDb\MyMovieDb.Services.TheMovieDb.csproj", "{58F83D4A-CCCC-4E91-8B13-FAF25C63184D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F063898-B9C3-4F22-9FE9-0B30B33689CB}"
 	ProjectSection(SolutionItems) = preProject
@@ -60,10 +56,6 @@ Global
 		{58F83D4A-CCCC-4E91-8B13-FAF25C63184D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58F83D4A-CCCC-4E91-8B13-FAF25C63184D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58F83D4A-CCCC-4E91-8B13-FAF25C63184D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74753D73-50BA-4AE3-A661-7A9FA66A66EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74753D73-50BA-4AE3-A661-7A9FA66A66EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74753D73-50BA-4AE3-A661-7A9FA66A66EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74753D73-50BA-4AE3-A661-7A9FA66A66EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,7 +67,6 @@ Global
 		{35E662F1-EFF4-42D4-9406-297EFEE7E5A0} = {5C1AE7FF-D38A-4B0F-864F-4E4AC85EFCA4}
 		{3D1EE578-5CC0-4BCD-800F-51E27EF1685E} = {5C1AE7FF-D38A-4B0F-864F-4E4AC85EFCA4}
 		{58F83D4A-CCCC-4E91-8B13-FAF25C63184D} = {5C1AE7FF-D38A-4B0F-864F-4E4AC85EFCA4}
-		{74753D73-50BA-4AE3-A661-7A9FA66A66EE} = {A903A970-B385-4C12-8C80-E96551A23469}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2975154-71E1-487A-AF82-A24475168418}
