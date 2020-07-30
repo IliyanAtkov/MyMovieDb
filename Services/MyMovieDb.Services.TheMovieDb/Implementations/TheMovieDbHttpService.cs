@@ -5,6 +5,7 @@ using MyMovieDb.Services.TheMovieDb.Interfaces;
 using MyMovieDb.Services.TheMovieDb.Models.Http;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -38,7 +39,6 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
                 url = BuildQueryParams(queryParams, url);
 
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
-
                 using var res = await httpClient.SendAsync(request);
                 if (res.IsSuccessStatusCode)
                 {

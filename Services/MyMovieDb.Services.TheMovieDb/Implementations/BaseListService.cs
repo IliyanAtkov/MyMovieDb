@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace MyMovieDb.Services.TheMovieDb.Implementations
 {
@@ -27,6 +25,12 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
             {
                 Parameters.Add("language", language);
             }
+        }
+
+        public void AddPageAndLanguageParameters(string language, int? page)
+        {
+            AddLanguageParameter(language);
+            AddPageParameter(page);
         }
     }
 }

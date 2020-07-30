@@ -1,9 +1,6 @@
-﻿using MyMovieDb.Services.Constants;
+﻿using MyMovieDb.Services.TheMovieDb.Constants;
 using MyMovieDb.Services.TheMovieDb.Interfaces;
 using MyMovieDb.Services.TheMovieDb.Models.Movies;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MyMovieDb.Services.TheMovieDb.Implementations
@@ -11,18 +8,20 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
     public class MovieService : BaseListService, IMovieService
     {
         private readonly TheMovieDbHttpService movieDbHttpService;
+        private readonly IGenresService genresService;
 
-        public MovieService(TheMovieDbHttpService movieDbHttpService)
+        public MovieService(TheMovieDbHttpService movieDbHttpService, IGenresService genresService)
         {
             this.movieDbHttpService = movieDbHttpService;
+            this.genresService = genresService;
         }
 
         public async Task GetNowPlaying(string language, int page = 1)
         {
-            base.AddPageParameter(page);
-            base.AddLanguageParameter(language);
+            base.AddPageAndLanguageParameters(language, page);
+            var result = await movieDbHttpService.Get<BaseMoviesResult>(ApiUrlConstants.MoviesNowPlaying, base.Parameters);
+            //var genres = await genresService.GetGenreById(language);
 
-            var result = await movieDbHttpService.Get<BaseMoviesResult>("movie/now_playing", base.Parameters);
         }
     }
 }

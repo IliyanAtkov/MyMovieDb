@@ -10,7 +10,7 @@ namespace MyMovieDb.Services.TheMovieDb.Models.Movies
         public int? Page { get; set; }
 
         [JsonPropertyName("results")]
-        public List<BaseMovieListResult>? Results { get; set; }
+        public List<BaseMoviesListResult>? Results { get; set; }
 
         [JsonPropertyName("total_results")]
         public int? TotalResults { get; set; }

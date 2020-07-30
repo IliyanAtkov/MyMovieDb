@@ -2,7 +2,7 @@
 
 namespace MyMovieDb.Services.TheMovieDb.Models.Http
 {
-    public class HttpServiceResult<T> where T : class, IServiceResult
+    public class HttpServiceResult<T> : IIsSucessResult where T : class, IServiceResult
     {
         public HttpServiceError? Error { get; set; }
 

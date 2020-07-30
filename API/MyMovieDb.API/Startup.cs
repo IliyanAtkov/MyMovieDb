@@ -31,6 +31,7 @@ namespace MyMovieDb.API
             services.AddControllers()
             .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true);
             services.ConfigureMovieDbApiHttpClient(Configuration);
+            services.AddMemoryCache();
 
             services.AddServices();
         }
