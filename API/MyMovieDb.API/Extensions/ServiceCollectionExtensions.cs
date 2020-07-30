@@ -65,26 +65,55 @@ namespace MyMovieDb.API.Extensions
                     int.Parse(configuration[ConfigurationNamesConstants.TheMovieDbPollyRetryCount]),
                     _ => TimeSpan.FromMilliseconds(double.Parse(configuration[ConfigurationNamesConstants.TheMovieDbPollyRetryTimeInMiliseconds]))))
                 .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(
-                    int.Parse(configuration[ConfigurationNamesConstants.TheMovieDbPollyCircuitBreakerCount]), 
+                    int.Parse(configuration[ConfigurationNamesConstants.TheMovieDbPollyCircuitBreakerCount]),
                     TimeSpan.FromSeconds(double.Parse(configuration[ConfigurationNamesConstants.TheMovieDbPollyCircuitBreakerTimeInSeconds]))));
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             LoadAssemblies();
+            LoadServices(services);
+            LoadSingletonServices(services);
 
+            return services;
+        }
+
+        private static void LoadServices(IServiceCollection services)
+        {
             AppDomain.CurrentDomain.GetAssemblies()
-               .Where(t => t.FullName != null && t.FullName.Contains(MyMovieDbServicesName))
-               .SelectMany(s => s.GetTypes().Where(t => t.IsClass && t.GetInterfaces().Any(v => v.Name == nameof(IService)) && t.GetInterfaces().Any(i => i.Name == $"I{t.Name}")))
+                .Where(t => t.FullName != null && t.FullName.Contains(MyMovieDbServicesName))
+                .SelectMany(s => s.GetTypes().Where(t => t.IsClass && t.GetInterfaces().Any(v => v.Name == nameof(IService)) && t.GetInterfaces().Any(i => i.Name == $"I{t.Name}")))
                 .Select(t => new
                 {
                     Interface = t.GetInterface($"I{t.Name}"),
                     Implementation = t
                 })
-              .ToList()
-              .ForEach(s => services.AddTransient(s.Interface, s.Implementation));
+                .ToList()
+                .ForEach(s => services.AddTransient(s.Interface, s.Implementation));
+        }
 
-            return services;
+        private static void LoadSingletonServices(IServiceCollection services)
+        {
+            var test = AppDomain.CurrentDomain.GetAssemblies()
+               .Where(t => t.FullName != null && t.FullName.Contains(MyMovieDbServicesName))
+               .SelectMany(s => s.GetTypes().Where(t => t.IsClass && t.GetInterfaces().Any(v => v.Name == nameof(ISingletonService)) && t.GetInterfaces().Any(i => i.Name == $"I{t.Name}")))
+               .Select(t => new
+               {
+                   Interface = t.GetInterface($"I{t.Name}"),
+                   Implementation = t
+               })
+               .ToList();
+
+            AppDomain.CurrentDomain.GetAssemblies()
+               .Where(t => t.FullName != null && t.FullName.Contains(MyMovieDbServicesName))
+               .SelectMany(s => s.GetTypes().Where(t => t.IsClass && t.GetInterfaces().Any(v => v.Name == nameof(ISingletonService)) && t.GetInterfaces().Any(i => i.Name == $"I{t.Name}")))
+               .Select(t => new
+               {
+                   Interface = t.GetInterface($"I{t.Name}"),
+                   Implementation = t
+               })
+               .ToList()
+               .ForEach(s => services.AddSingleton(s.Interface, s.Implementation));
         }
 
         private static void LoadAssemblies()
