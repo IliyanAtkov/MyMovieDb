@@ -1,13 +1,12 @@
 ﻿using MyMovieDb.Services.Interfaces;
-using System;
+using MyMovieDb.Services.TheMovieDb.Models.Movies;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyMovieDb.Services.TheMovieDb.Interfaces
 {
     public interface IMovieService : IService
     {
-        Task GetNowPlaying(string language, int page = 1);
+        Task<IEnumerable<MoviesListModel>> GetNowPlaying(string language, int page = 1);
     }
 }

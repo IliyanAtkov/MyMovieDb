@@ -1,6 +1,9 @@
 ﻿using MyMovieDb.Services.TheMovieDb.Constants;
 using MyMovieDb.Services.TheMovieDb.Interfaces;
+using MyMovieDb.Services.TheMovieDb.Models.Http;
 using MyMovieDb.Services.TheMovieDb.Models.Movies;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyMovieDb.Services.TheMovieDb.Implementations
@@ -16,12 +19,75 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
             this.genresService = genresService;
         }
 
-        public async Task GetNowPlaying(string language, int page = 1)
+        public async Task<IEnumerable<MoviesListModel>> GetNowPlaying(string language, int page = 1)
         {
             base.AddPageAndLanguageParameters(language, page);
-            var result = await movieDbHttpService.Get<BaseMoviesResult>(ApiUrlConstants.MoviesNowPlaying, base.Parameters);
-            //var genres = await genresService.GetGenreById(language);
+            var nowPlayingMoviesResult = await movieDbHttpService.Get<BaseMoviesResult>(ApiUrlConstants.MoviesNowPlaying, base.Parameters);
+            return await GetMoviesListModel(nowPlayingMoviesResult, language);
+        }
 
+        private async Task<List<MoviesListModel>> GetMoviesListModel(HttpServiceResult<BaseMoviesResult> baseMoviesResult, string language)
+        {
+            var model = new List<MoviesListModel>();
+
+            if (!baseMoviesResult.IsSucess)
+            {
+                return model;
+            }
+
+            List<BaseMoviesListResult> movies = new List<BaseMoviesListResult>();
+            if (baseMoviesResult.Result != null && baseMoviesResult.Result.Results != null)
+            {
+                movies = baseMoviesResult.Result.Results;
+            }
+
+
+            foreach (var movie in movies)
+            {
+                if (movie.Id == null)
+                {
+                    continue;
+                }
+
+                var movieModel = new MoviesListModel()
+                {
+                    Title = movie.Title,
+                    BackdropPath = movie.BackdropPath,
+                    VoteAverage = movie.VoteAverage,
+                    Id = movie.Id.Value,
+                    Overview = movie.Overview,
+                    PosterPath = movie.PosterPath
+                };
+
+                if (movie.ReleaseDate != null)
+                {
+                    if (int.TryParse(movie.ReleaseDate, out int releaseDate))
+                    {
+                        movieModel.ReleaseDate = releaseDate;
+                    }
+                }
+
+                if (movie.GenreIds != null)
+                {
+                    foreach (var genreId in movie.GenreIds)
+                    {
+                        var genreResult = await genresService.GetGenreById(genreId, language);
+                        if (genreResult == null)
+                        {
+                            continue;
+                        }
+
+                        movieModel.Genres.Add(new Models.Genres.GenreModel()
+                        {
+                            Name = genreResult.Name != null ? genreResult.Name : string.Empty
+                        });
+                    }
+                }
+
+                model.Add(movieModel);
+            }
+
+            return model;
         }
     }
 }

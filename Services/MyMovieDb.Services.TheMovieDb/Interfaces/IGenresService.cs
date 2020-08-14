@@ -6,8 +6,8 @@ namespace MyMovieDb.Services.TheMovieDb.Interfaces
 {
     public interface IGenresService : IService
     {
-        Task<GenresListResult?> GetGenres(string language);
+        Task<GenreListModel?> GetGenres(string language);
 
-        Task<GenresListResult?> GetGenreById(int id, string language);
+        Task<GenreModel?> GetGenreById(int id, string language);
     }
 }

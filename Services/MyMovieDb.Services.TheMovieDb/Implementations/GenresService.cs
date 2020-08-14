@@ -5,7 +5,6 @@ using MyMovieDb.Services.Models;
 using MyMovieDb.Services.TheMovieDb.Constants;
 using MyMovieDb.Services.TheMovieDb.Interfaces;
 using MyMovieDb.Services.TheMovieDb.Models.Genres;
-using MyMovieDb.Services.TheMovieDb.Models.Http;
 using System.Linq;
 
 namespace MyMovieDb.Services.TheMovieDb.Implementations
@@ -23,10 +22,10 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
             this.logger = logger;
         }
 
-        public async Task<GenresListResult?> GetGenreById(int id, string language)
+        public async Task<GenreModel?> GetGenreById(int id, string language)
         {
             var genreResult = await GetGenres(language);
-            if (genreResult == null || genreResult.Genres == null)
+            if (genreResult == null || genreResult.Genres.Count == 0)
             {
                 logger.LogWarning("No genres");
                 return null;
@@ -36,21 +35,48 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
             if (genre == null)
             {
                 logger.LogWarning("Genre with {Id} doesn't exists", id);
+                return null;
             }
 
-            return genreResult;
+            return genre;
         }
 
-        public async Task<GenresListResult?> GetGenres(string language)
+        public async Task<GenreListModel?> GetGenres(string language)
         {
-            var genres = await this.cacheService.GetOrCreate(CacheConstants.GetGenres, CacheExpiration.OneWeek, async () => await GetGenresFromApi(language));
-            return genres?.Result;
+            return await this.cacheService.GetOrCreate(CacheConstants.GetGenres, CacheExpiration.OneWeek, async () => await GetGenresFromApi(language));
         }
 
-        private async Task<HttpServiceResult<GenresListResult>> GetGenresFromApi(string language)
+        private async Task<GenreListModel?> GetGenresFromApi(string language)
         {
             base.AddLanguageParameter(language);
-            return await movieDbHttpService.Get<GenresListResult>(ApiUrlConstants.GenresMovieList, base.Parameters);
+            var genreResult =  await movieDbHttpService.Get<GenresListResult>(ApiUrlConstants.GenresMovieList, base.Parameters);
+            if (!genreResult.IsSucess)
+            {
+                return null;
+            }
+
+            GenreListModel? genresModel = null;
+            
+            if (genreResult.Result != null && genreResult.Result.Genres != null)
+            {
+                var genres = genreResult.Result.Genres;
+                genresModel = new GenreListModel();
+                foreach (var genre in genres)
+                {
+                    if (genre.Id == null || genre.Name == null)
+                    {
+                        continue;
+                    }
+
+                    genresModel.Genres.Add(new GenreModel()
+                    {
+                        Id = genre.Id.Value,
+                        Name = genre.Name
+                    });
+                }
+            }
+
+            return genresModel;
         }
     }
 }
