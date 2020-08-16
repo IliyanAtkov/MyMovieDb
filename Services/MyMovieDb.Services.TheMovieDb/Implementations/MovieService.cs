@@ -2,6 +2,7 @@
 using MyMovieDb.Services.TheMovieDb.Interfaces;
 using MyMovieDb.Services.TheMovieDb.Models.Http;
 using MyMovieDb.Services.TheMovieDb.Models.Movies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,7 +62,7 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
 
                 if (movie.ReleaseDate != null)
                 {
-                    if (int.TryParse(movie.ReleaseDate, out int releaseDate))
+                    if (DateTime.TryParse(movie.ReleaseDate, out DateTime releaseDate))
                     {
                         movieModel.ReleaseDate = releaseDate;
                     }

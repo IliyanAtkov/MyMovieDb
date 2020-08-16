@@ -50,13 +50,13 @@ namespace MyMovieDb.Services.Implementations
                     return data;
                 }
 
-                var newData = await getData();
+                data = await getData();
                 if (IsDataValid(data))
                 {
-                    memoryCache.Set(key, newData, GetAbsoluteExpiration(cacheExpiration));
+                    memoryCache.Set(key, data, GetAbsoluteExpiration(cacheExpiration));
                 }
 
-                return newData;
+                return data;
             }
             finally
             {

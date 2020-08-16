@@ -1,4 +1,5 @@
 ﻿using MyMovieDb.Services.TheMovieDb.Models.Genres;
+using System;
 using System.Collections.Generic;
 
 namespace MyMovieDb.Services.TheMovieDb.Models.Movies
@@ -9,7 +10,7 @@ namespace MyMovieDb.Services.TheMovieDb.Models.Movies
 
         public string? Title { get; set; }
 
-        public int? ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
         public string? PosterPath { get; set; }
 

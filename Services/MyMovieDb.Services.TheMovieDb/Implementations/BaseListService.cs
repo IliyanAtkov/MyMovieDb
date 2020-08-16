@@ -13,17 +13,23 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
 
         public void AddPageParameter(int? page)
         {
-            if (page.HasValue && page.Value > 0)
+            if (!Parameters.ContainsKey("page"))
             {
-                Parameters.Add("page", page.Value.ToString());
+                if (page.HasValue && page.Value > 0)
+                {
+                    Parameters.Add("page", page.Value.ToString());
+                }
             }
         }
 
         public void AddLanguageParameter(string language)
         {
-            if (!string.IsNullOrWhiteSpace(language))
+            if (!Parameters.ContainsKey("language"))
             {
-                Parameters.Add("language", language);
+                if (!string.IsNullOrWhiteSpace(language))
+                {
+                    Parameters.Add("language", language);
+                }
             }
         }
 
