@@ -80,7 +80,8 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
 
                         movieModel.Genres.Add(new Models.Genres.GenreModel()
                         {
-                            Name = genreResult.Name != null ? genreResult.Name : string.Empty
+                            Name = genreResult.Name != null ? genreResult.Name : string.Empty,
+                            Id = genreResult.Id
                         });
                     }
                 }
