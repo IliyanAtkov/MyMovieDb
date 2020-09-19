@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using MyMovieDb.Services.Constants;
 using MyMovieDb.Services.TheMovieDb.Interfaces;
 using MyMovieDb.Services.TheMovieDb.Models.Http;

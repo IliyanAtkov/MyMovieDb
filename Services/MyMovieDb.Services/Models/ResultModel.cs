@@ -5,14 +5,13 @@ namespace MyMovieDb.Services.Models
 {
     public class ResultModel
     {
-        private HashSet<string> messages;
+        private HashSet<string> messages = new HashSet<string>();
         private const string genericErrorMessage = "Error! Please try again!";
 
         public ResultModel()
         {
             IsOneMessage = true;
             IsSucess = false;
-            messages = new HashSet<string>();
         }
 
         public ResultModel(string message)
@@ -74,7 +73,12 @@ namespace MyMovieDb.Services.Models
 
         public string GetFirstMessage()
         {
-            return messages.FirstOrDefault();
+            if (messages != null)
+            {
+                return messages.First();
+            }
+
+            return string.Empty;
         }
 
         public ICollection<string> GetMessages()
