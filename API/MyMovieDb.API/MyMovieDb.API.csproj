@@ -5,16 +5,16 @@
     <UserSecretsId>1505efdc-1782-4ca7-bb19-bd87a1ccfd33</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0-rc.1.20451.17" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-rc.1.20451.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-rc.1.20451.13">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.0-rc.1.20451.7" />
-    <PackageReference Include="NLog" Version="4.7.4" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.0" />
+    <PackageReference Include="NLog" Version="4.7.5" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.3" />
     <PackageReference Include="Polly" Version="7.2.1" />
     <PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
