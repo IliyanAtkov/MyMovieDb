@@ -22,9 +22,19 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
 
         public async Task<IEnumerable<MoviesListModel>> GetNowPlaying(string language, int page = 1)
         {
+            return await GetMovies(language, ApiUrlConstants.MoviesNowPlaying, page);
+        }
+
+        public async Task<IEnumerable<MoviesListModel>> GetPopular(string language, int page = 1)
+        {
+            return await GetMovies(language, ApiUrlConstants.MoviesPopular, page);
+        }
+
+        private async Task<IEnumerable<MoviesListModel>> GetMovies(string language, string apiUrl, int page)
+        {
             base.AddPageAndLanguageParameters(language, page);
-            var nowPlayingMoviesResult = await movieDbHttpService.Get<BaseMoviesResult>(ApiUrlConstants.MoviesNowPlaying, base.Parameters);
-            return await GetMoviesListModel(nowPlayingMoviesResult, language);
+            var moviesResult = await movieDbHttpService.Get<BaseMoviesResult>(apiUrl, base.Parameters);
+            return await GetMoviesListModel(moviesResult, language);
         }
 
         private async Task<List<MoviesListModel>> GetMoviesListModel(HttpServiceResult<BaseMoviesResult> baseMoviesResult, string language)

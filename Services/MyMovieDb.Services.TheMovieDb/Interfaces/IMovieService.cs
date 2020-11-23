@@ -8,5 +8,6 @@ namespace MyMovieDb.Services.TheMovieDb.Interfaces
     public interface IMovieService : IService
     {
         Task<IEnumerable<MoviesListModel>> GetNowPlaying(string language, int page = 1);
+        Task<IEnumerable<MoviesListModel>> GetPopular(string language, int page = 1);
     }
 }
