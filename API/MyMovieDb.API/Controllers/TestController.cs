@@ -16,9 +16,9 @@ namespace MyMovieDb.API.Controllers
             this.movieService = movieService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string language)
         {
-            await movieService.GetNowPlaying("en");
+            var nowPlayingMovies = await movieService.GetPopular(language);
             return new EmptyResult();
         }
     }
