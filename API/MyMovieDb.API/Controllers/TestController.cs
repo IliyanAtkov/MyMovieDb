@@ -16,6 +16,7 @@ namespace MyMovieDb.API.Controllers
             this.movieService = movieService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(string language)
         {
             var nowPlayingMovies = await movieService.GetPopular(language);

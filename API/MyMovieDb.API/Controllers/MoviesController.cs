@@ -19,13 +19,15 @@ namespace MyMovieDb.API.Controllers
             this.movieService = movieService;
         }
 
-        public async Task<IEnumerable<MoviesListModel>> GetNowPlaying(MoviesListInputModel model)
+        [HttpGet]
+        public async Task<IEnumerable<MoviesListModel>> GetNowPlaying([FromQuery]MoviesListInputModel model)
         {
             var nowPlayingMovies = await movieService.GetNowPlaying(model.Language, model.Page);
             return nowPlayingMovies;
         }
 
-        public async Task<IEnumerable<MoviesListModel>> GetPopular(MoviesListInputModel model)
+        [HttpGet]
+        public async Task<IEnumerable<MoviesListModel>> GetPopular([FromQuery]MoviesListInputModel model)
         {
             var popularMovies = await movieService.GetPopular(model.Language, model.Page);
             return popularMovies;
