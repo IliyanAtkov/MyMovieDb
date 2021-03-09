@@ -9,5 +9,6 @@ namespace MyMovieDb.Services.TheMovieDb.Interfaces
     {
         Task<IEnumerable<MoviesListModel>> GetNowPlaying(string language, int page = 1);
         Task<IEnumerable<MoviesListModel>> GetPopular(string language, int page = 1);
+        Task<IEnumerable<MoviesListModel>> GetUpcoming(string language, int page = 1);
     }
 }

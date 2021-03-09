@@ -30,10 +30,16 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
             return await GetMovies(language, ApiUrlConstants.MoviesPopular, page);
         }
 
+        public async Task<IEnumerable<MoviesListModel>> GetUpcoming(string language, int page = 1)
+        {
+            return await GetMovies(language, ApiUrlConstants.MoviesUpcoming, page);
+        }
+
         private async Task<IEnumerable<MoviesListModel>> GetMovies(string language, string apiUrl, int page)
         {
             base.AddPageAndLanguageParameters(language, page);
             var moviesResult = await movieDbHttpService.Get<BaseMoviesResult>(apiUrl, base.Parameters);
+
             return await GetMoviesListModel(moviesResult, language);
         }
 

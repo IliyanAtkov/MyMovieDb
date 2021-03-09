@@ -32,5 +32,12 @@ namespace MyMovieDb.API.Controllers
             var popularMovies = await movieService.GetPopular(model.Language, model.Page);
             return popularMovies;
         }
+
+        [HttpGet]
+        public async Task<IEnumerable<MoviesListModel>> GetUpcoming([FromQuery] MoviesListInputModel model)
+        {
+            var upcomingMovies = await movieService.GetUpcoming(model.Language, model.Page);
+            return upcomingMovies;
+        }
     }
 }
