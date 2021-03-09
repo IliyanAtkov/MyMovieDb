@@ -33,6 +33,17 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
             }
         }
 
+        public void AddStringParameter(string parameterName, string value)
+        {
+            if (!Parameters.ContainsKey(parameterName))
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    Parameters.Add(parameterName, value);
+                }
+            }
+        }
+
         public void AddPageAndLanguageParameters(string language, int? page)
         {
             AddLanguageParameter(language);

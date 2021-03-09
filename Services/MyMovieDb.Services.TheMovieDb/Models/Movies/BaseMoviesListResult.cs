@@ -17,7 +17,7 @@ namespace MyMovieDb.Services.TheMovieDb.Models.Movies
         public int[]? GenreIds { get; set; }
 
         [JsonPropertyName("id")]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [JsonPropertyName("title")]
         public string? Title { get; set; }

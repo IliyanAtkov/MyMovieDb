@@ -61,17 +61,12 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
 
             foreach (var movie in movies)
             {
-                if (movie.Id == null)
-                {
-                    continue;
-                }
-
                 var movieModel = new MoviesListModel()
                 {
                     Title = movie.Title,
                     BackdropPath = movie.BackdropPath,
                     VoteAverage = movie.VoteAverage,
-                    Id = movie.Id.Value,
+                    Id = movie.Id,
                     Overview = movie.Overview,
                     PosterPath = movie.PosterPath
                 };
