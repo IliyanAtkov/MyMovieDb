@@ -1,12 +1,9 @@
 ﻿using MyMovieDb.Services.TheMovieDb.Models.Companies;
 using MyMovieDb.Services.TheMovieDb.Models.Countries;
 using MyMovieDb.Services.TheMovieDb.Models.Genres;
-using System;
+using MyMovieDb.Services.TheMovieDb.Models.Languages;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace MyMovieDb.Services.TheMovieDb.Models.Movies
 {
@@ -52,7 +49,7 @@ namespace MyMovieDb.Services.TheMovieDb.Models.Movies
         public List<CompanyResult>? ProductionCompanies { get; set; }
 
         [JsonPropertyName("production_countries")]
-        public List<CountryResult>? ProducitonCountries { get; set; }
+        public List<CountryResult>? ProductionCountries { get; set; }
 
         [JsonPropertyName("release_date")]
         public string? ReleaseDate { get; set; }

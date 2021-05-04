@@ -20,6 +20,11 @@ namespace MyMovieDb.Services.TheMovieDb.Implementations
             this.genresService = genresService;
         }
 
+        //public async Task<MovieModel> GetMovie(int movieId, string language)
+        //{
+
+        //}
+
         public async Task<IEnumerable<MoviesListModel>> GetNowPlaying(string language, int page = 1)
         {
             return await GetMovies(language, ApiUrlConstants.MoviesNowPlaying, page);
